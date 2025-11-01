@@ -1,0 +1,426 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device & Customer Details</title>
+    <style>
+        /* Keep your same styles */
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body > div {
+            display: flex; flex-direction: column; gap: 20px; max-width: 450px; width: 100%;
+        }
+        .device, .customer {
+            background: white; border-radius: 16px; padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
+        }
+        h1 { color: #1e293b; font-size: 20px; margin-bottom: 25px; }
+        input[type="text"], input[type="number"], input[type="password"] {
+            width: 100%; padding: 12px 16px; margin: 0 0 15px 0;
+            border: 2px solid #e2e8f0; border-radius: 10px;
+            background: #f8fafc; font-size: 14px;
+        }
+        button {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            color: white; font-size: 15px; font-weight: 600;
+            padding: 14px 36px; border: none; border-radius: 10px;
+            cursor: pointer; width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form method="post" action="/mobileproject/user_post/">
+            {% csrf_token %}
+            <div class="device">
+                <h1>DEVICE DETAILS</h1>
+                <input type="text" name="phonemodel" placeholder="Phone Model" required><br>
+                <input type="number" name="imeino" placeholder="IMEI Number" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <input type="text" name="complaint" placeholder="Complaint" required><br>
+            </div>
+            <div class="customer">
+                <h1>CUSTOMER DETAILS</h1>
+                <input type="text" name="customer_name" placeholder="Customer Name" required><br>
+                <input type="number" name="phone_number" placeholder="Phone Number" required><br>
+            </div>
+            <div class="save-button">
+                <button type="submit">Save Details</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device & Customer Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        /* Decorative background circles */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 183, 77, 0.2), transparent);
+            border-radius: 50%;
+            top: -150px;
+            right: -100px;
+            animation: float1 15s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 138, 101, 0.2), transparent);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -80px;
+            animation: float2 12s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 30px); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        body > div {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 25px 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08),
+                        0 10px 20px rgba(0, 0, 0, 0.04);
+            margin: 15px auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-header .icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 24px;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .form-header h1 {
+            color: #2d3748;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .form-header p {
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .device, .customer {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            color: #ff6b6b;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #fff5f5;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff9a56 0%, #ff6b6b 100%);
+            border-radius: 2px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: -8px;
+            left: 14px;
+            background: white;
+            padding: 0 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #718096;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .input-group:focus-within label {
+            opacity: 1;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            margin: 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: #fafafa;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            color: #2d3748;
+        }
+
+        input::placeholder {
+            color: #a0aec0;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff9a56;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 154, 86, 0.1);
+            transform: translateY(-1px);
+        }
+
+        input:hover:not(:focus) {
+            border-color: #cbd5e1;
+            background: white;
+        }
+
+        .save-button {
+            margin-top: 8px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 13px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        button:hover::before {
+            transform: translateX(100%);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Decorative dots */
+        .dots {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ff9a56;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .dots:nth-child(1) {
+            top: 50px;
+            right: 50px;
+            animation: pulse-dot 3s ease-in-out infinite;
+        }
+
+        .dots:nth-child(2) {
+            bottom: 80px;
+            left: 40px;
+            width: 8px;
+            height: 8px;
+            background: #ff6b6b;
+            animation: pulse-dot 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.6; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 520px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            body > div {
+                padding: 40px 30px;
+            }
+
+            .form-header h1 {
+                font-size: 26px;
+            }
+
+            .form-header .icon {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="password"] {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 16px 28px;
+                font-size: 16px;
+            }
+        }
+
+        /* Remove spinner from number inputs */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span class="dots"></span>
+        <span class="dots"></span>
+        
+        <div class="form-header">
+            <div class="icon">📱</div>
+            <h1>Repair Service</h1>
+            <p>Fill in the details to start repair process</p>
+        </div>
+
+        <form method="post" action="/mobileproject/user_post/">
+            {% csrf_token %}
+            <div class="device">
+                <div class="section-title">Device Information</div>
+                <div class="input-group">
+                    <input type="text" name="phonemodel" placeholder="Phone Model" required>
+                </div>
+                <div class="input-group">
+                    <input type="number" name="imeino" placeholder="IMEI Number" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="complaint" placeholder="Complaint" required>
+                </div>
+            </div>
+            <div class="customer">
+                <div class="section-title">Customer Information</div>
+                <div class="input-group">
+                    <input type="text" name="customer_name" placeholder="Customer Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="number" name="phone_number" placeholder="Phone Number" required>
+                </div>
+            </div>
+            <div class="save-button">
+                <button type="submit">Save Details</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
