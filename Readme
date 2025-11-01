@@ -1,0 +1,33 @@
+# SJ Mobiles
+
+## Project Overview
+SJ Mobiles is a Django-based web application designed to manage mobile-related operations. The project includes features for user authentication, viewing mobile details, and managing user interactions.
+
+## Project Structure
+- **manage.py**: Django's command-line utility for administrative tasks.
+- **mobileapp/**: Contains the core application logic, including models, views, templates, and static files.
+  - **models.py**: Defines the database schema.
+  - **views.py**: Contains the logic for handling HTTP requests and responses.
+  - **templates/**: HTML templates for rendering the UI.
+  - **static/**: Static assets like images and CSS files.
+- **mobileproject/**: Contains project-wide settings and configurations.
+
+## How to Run the Project
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install the required dependencies using `pip install -r requirements.txt`.
+4. Run migrations using `python manage.py migrate`.
+5. Start the development server with `python manage.py runserver`.
+6. Access the application at `http://127.0.0.1:8000/`.
+
+## Features
+- User authentication and login.
+- Viewing and managing mobile details.
+- Interactive user interface.
+
+## Requirements
+- Python 3.11+
+- Django 4.0+
+
+## License
+This project is licensed under the MIT License.
